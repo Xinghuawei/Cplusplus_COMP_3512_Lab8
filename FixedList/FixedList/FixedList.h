@@ -57,8 +57,12 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 
 template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
-{
-	return t.begin();
+{	
+	if (t.empty()) {
+		return -1;
+	} else {
+		return t.begin();
+	}
 }
 
 template<class T, size_t N>
