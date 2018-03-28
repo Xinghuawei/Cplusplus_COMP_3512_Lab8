@@ -21,7 +21,7 @@ public:
 
 	size_t capacity() const;
 
-	bool add(const T&);
+	bool add(const T& t);
 
 	T remove(const T&);
 
@@ -81,7 +81,17 @@ inline size_t FixedList<T, N>::size() const
 template<class T, size_t N>
 inline size_t FixedList<T, N>::capacity() const
 {
-	return size_t();
+	return N;
+}
+
+template<class T, size_t N>
+inline bool FixedList<T, N>::add(const T & t)
+{
+	if (lst.size() < (N-1)) {
+		lst.push_back(t);
+	} else {
+		return -1;
+	}
 }
 
 
