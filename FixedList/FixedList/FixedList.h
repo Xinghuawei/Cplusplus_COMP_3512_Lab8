@@ -37,7 +37,7 @@ FixedList<T,N>::~FixedList() {}
 
 template<class T, size_t N>
 inline const T & FixedList<T,N>::get(unsigned int index) const {
-	if (index > N) {
+	if (index >= N || index < 0) {
 		return -1;
 	} else {
 		return lst[index];
@@ -46,8 +46,13 @@ inline const T & FixedList<T,N>::get(unsigned int index) const {
 
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
-{
-	return lst[index];
+{	
+	if (index >= N || index < 0) {
+		return -1;
+	}
+	else {
+		return lst[index];
+	}
 }
 
 template<class T, size_t N>
