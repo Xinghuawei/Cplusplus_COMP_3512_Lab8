@@ -5,15 +5,15 @@ using namespace std;
 template<class T, size_t N>
 class FixedList {
 private:
-	list<int>;
+	list<T> lst{ N };
 public:	
 	FixedList();
 	
 	~FixedList();
 
-	const T& get(unsigned int) const;
+	const T& get(unsigned int index) const;
 
-	T& operator[](unsigned int);
+	T& operator[](unsigned int index);
 
 	int getFirstIndex(const T& t) const;
 
@@ -25,4 +25,17 @@ public:
 
 	T remove(const T&);
 
+};
+
+
+
+template<class T, size_t N>
+FixedList::FixedList() {};
+
+template<class T, size_t N>
+FixedList::~FixedList() {};
+
+template<class T, size_t N>
+const T& FixedList::get(unsigned int index) const {
+	
 };
