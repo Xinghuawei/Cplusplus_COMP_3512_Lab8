@@ -9,7 +9,10 @@ int main() {
 	mylist.add(5);
 	mylist.add(7);
 
-	cout << mylist.get(0) << endl;
+	cout << mylist[0] << endl;
+	cout << mylist.capacity() << endl;
+	cout << mylist.getFirstIndex(2) << endl;
 
+	system("pause");
 
 }
