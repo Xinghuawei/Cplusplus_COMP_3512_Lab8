@@ -30,18 +30,37 @@ public:
 
 
 template<class T, size_t N>
-FixedList::FixedList() {}
+FixedList<T,N>::FixedList() {}
 
 template<class T, size_t N>
-FixedList::~FixedList() {}
+FixedList<T,N>::~FixedList() {}
 
 template<class T, size_t N>
-const T& FixedList::get(unsigned int index) const {
-	return lst[index];
-
+inline const T & FixedList<T,N>::get(unsigned int index) const {
+	if (index > N) {
+		return -1;
+	} else {
+		return lst[index];
+	}
 }
+
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
 {
-	// TODO: insert return statement here
+	return lst[index];
 }
+
+template<class T, size_t N>
+inline int FixedList<T, N>::getFirstIndex(const T & t) const
+{
+	return t.begin();
+}
+
+template<class T, size_t N>
+inline size_t FixedList<T, N>::size() const
+{
+	return size_t();
+}
+
+
+
