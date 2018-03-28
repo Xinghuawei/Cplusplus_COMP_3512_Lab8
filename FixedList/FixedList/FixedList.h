@@ -71,8 +71,8 @@ template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const
 {
 	int count{ 0 };
-	for (typename T::const_iterator it = c.begin();
-		it != c.end(); ++it) {
+	for (typename T::const_iterator it = t.begin();
+		it != t.end(); ++it) {
 		count++;
 	}
 	return count;
@@ -89,10 +89,34 @@ inline bool FixedList<T, N>::add(const T & t)
 {
 	if (lst.size() < (N-1)) {
 		lst.push_back(t);
+		return true;
 	} else {
-		return -1;
+		return false;
 	}
 }
 
+template<class T, size_t N>
+inline T FixedList<T, N>::remove(const T & t)
+{	
+	int index{ 0 };
+	for (typename T::const_iterator it = t.begin();
+		it != t.end(); ++it) {
+		if (*it == t) {
+			it = lst.erase(it);
+		}
+		else {
+			index++;
+		}
+	}
 
+	for (typename T::const_iterator  itt = (index+1);
+		itt != t.end(); ++itt) {
+		*(itt-1) = *itt
+	}
+	return it;
+}
+
+int main() {
+
+}
 
