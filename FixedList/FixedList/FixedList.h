@@ -51,7 +51,7 @@ template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
 {
 	if (index >= cap || index < 0) {
-		throw "not correct";
+		throw "Index out of bound";
 	}
 	else {
 		std::list<T>::iterator it = std::next(lst.begin(), index); 
@@ -63,6 +63,7 @@ template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
 {	
 	int count{ 0 };
+	//wrong
 	if (s_size==0) {
 		return -1;
 	}
@@ -70,21 +71,16 @@ inline int FixedList<T, N>::getFirstIndex(const T & t) const
 		for (std::list<T>::const_iterator it = lst.begin();
 			it != lst.end(); ++it) {
 			if (t != *it) {
-				count++;
+				return std::distance(lst.begin(), it);
 			}
-			
 		}
-		return count;
+		
 	}
 }
 
 template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const
 {
-	for (typename T::const_iterator it = t.begin();
-		it != t.end(); ++it) {
-		s_size++;
-	}
 	return s_size;
 }
 
@@ -109,21 +105,19 @@ inline bool FixedList<T, N>::add(const T & t)
 template<class T, size_t N>
 inline T FixedList<T, N>::remove(const T & t)
 {	
-	int index{ 0 };
-	for (typename T::const_iterator it = t.begin();
-		it != t.end(); ++it) {
+	
+	for (std::list<T>::const_iterator it = lst.begin();
+		it != lst.end();) {
 		if (*it == t) {
+			T tmp = *it;
 			it = lst.erase(it);
+			s_size--;
+			return tmp;
 		} else {
-			index++;
+			it++;
 		}
 	}
-
-	for (typename T::const_iterator  itt = (index+1);
-		itt != t.end(); ++itt) {
-		*(itt-1) = *itt
-	}
-	return it;
+	
 }
 
 
