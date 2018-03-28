@@ -6,9 +6,9 @@ template<class T, size_t N>
 class FixedList {
 private:
 	list<T> lst{ N };
-public:	
+public:
 	FixedList();
-	
+
 	~FixedList();
 
 	const T& get(unsigned int index) const;
@@ -30,23 +30,24 @@ public:
 
 
 template<class T, size_t N>
-FixedList<T,N>::FixedList() {}
+FixedList<T, N>::FixedList() {}
 
 template<class T, size_t N>
-FixedList<T,N>::~FixedList() {}
+FixedList<T, N>::~FixedList() {}
 
 template<class T, size_t N>
-inline const T & FixedList<T,N>::get(unsigned int index) const {
+inline const T & FixedList<T, N>::get(unsigned int index) const {
 	if (index >= N || index < 0) {
 		return -1;
-	} else {
+	}
+	else {
 		return lst[index];
 	}
 }
 
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
-{	
+{
 	if (index >= N || index < 0) {
 		return -1;
 	}
@@ -57,10 +58,11 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 
 template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
-{	
+{
 	if (t.empty()) {
 		return -1;
-	} else {
+	}
+	else {
 		return t.begin();
 	}
 }
@@ -68,7 +70,12 @@ inline int FixedList<T, N>::getFirstIndex(const T & t) const
 template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const
 {
-	return size_t();
+	int count{ 0 };
+	for (typename T::const_iterator it = c.begin();
+		it != c.end(); ++it) {
+		count++;
+	}
+	return count;
 }
 
 
