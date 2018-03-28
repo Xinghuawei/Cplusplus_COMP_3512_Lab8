@@ -5,7 +5,9 @@ using namespace std;
 template<class T, size_t N>
 class FixedList {
 private:
-	list<T> lst{ N };
+	size_t size{ 0 };
+	size_t cap = N;
+	list<T> lst;
 public:
 	FixedList();
 
@@ -37,7 +39,7 @@ FixedList<T, N>::~FixedList() {}
 
 template<class T, size_t N>
 inline const T & FixedList<T, N>::get(unsigned int index) const {
-	if (index >= N || index < 0) {
+	if (index >= cap || index < 0) {
 		return -1;
 	}
 	else {
@@ -48,7 +50,7 @@ inline const T & FixedList<T, N>::get(unsigned int index) const {
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
 {
-	if (index >= N || index < 0) {
+	if (index >= cap || index < 0) {
 		return -1;
 	}
 	else {
@@ -59,7 +61,7 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
 {
-	if (t.empty()) {
+	if (size==0) {
 		return -1;
 	}
 	else {
@@ -70,24 +72,23 @@ inline int FixedList<T, N>::getFirstIndex(const T & t) const
 template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const
 {
-	int count{ 0 };
 	for (typename T::const_iterator it = t.begin();
 		it != t.end(); ++it) {
-		count++;
+		size++;
 	}
-	return count;
+	return size;
 }
 
 template<class T, size_t N>
 inline size_t FixedList<T, N>::capacity() const
 {
-	return N;
+	return cap;
 }
 
 template<class T, size_t N>
 inline bool FixedList<T, N>::add(const T & t)
 {
-	if (lst.size() < (N-1)) {
+	if (size < (N-1)) {
 		lst.push_back(t);
 		return true;
 	} else {
@@ -116,7 +117,4 @@ inline T FixedList<T, N>::remove(const T & t)
 	return it;
 }
 
-int main() {
-
-}
 
