@@ -94,7 +94,8 @@ inline bool FixedList<T, N>::add(const T & t)
 		s_size++;
 		return true;
 	} else {
-		throw std::out_of_range("Out of bound");
+		return false;
+		//throw std::out_of_range("Out of bound");
 	}
 }
 
