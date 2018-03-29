@@ -13,7 +13,12 @@ namespace FixedListUnitTest
 
 
 	public:
-		
+		TEST_METHOD(empty_list)
+		{
+			Assert::AreEqual(0, (int)list.size());
+			
+		}
+
 		TEST_METHOD(add_three_double)
 		{
 			Assert::AreEqual(true, list.add(1.1));
