@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <stdexcept>
 
 using namespace std;
 template<class T, size_t N>
@@ -25,7 +26,7 @@ public:
 
 	bool add(const T& t);
 
-	T remove(const T&);
+	T remove(const T& t);
 
 };
 
@@ -40,7 +41,7 @@ FixedList<T, N>::~FixedList() {}
 template<class T, size_t N>
 inline const T & FixedList<T, N>::get(unsigned int index) const {
 	if (index >= cap || index < 0) {
-		return -1;
+		throw std::out_of_range("Index out of bound");
 	}
 	else {
 		lst[index];
@@ -51,7 +52,7 @@ template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
 {
 	if (index >= cap || index < 0) {
-		throw "Index out of bound";
+			throw std::out_of_range("Index out of bound");
 	}
 	else {
 		std::list<T>::iterator it = std::next(lst.begin(), index); 
@@ -62,20 +63,15 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
 {	
-	int count{ 0 };
-	//wrong
-	if (s_size==0) {
-		return -1;
-	}
-	else {
+	
 		for (std::list<T>::const_iterator it = lst.begin();
 			it != lst.end(); ++it) {
-			if (t != *it) {
+			if (t == *it) {
 				return std::distance(lst.begin(), it);
 			}
 		}
 		
-	}
+		throw std::invalid_argument("Input not found in the container");
 }
 
 template<class T, size_t N>
@@ -98,23 +94,28 @@ inline bool FixedList<T, N>::add(const T & t)
 		s_size++;
 		return true;
 	} else {
-		return false;
+		throw std::out_of_range("Out of bound");
 	}
 }
 
 template<class T, size_t N>
 inline T FixedList<T, N>::remove(const T & t)
 {	
-	
-	for (std::list<T>::const_iterator it = lst.begin();
-		it != lst.end();) {
-		if (*it == t) {
-			T tmp = *it;
-			it = lst.erase(it);
-			s_size--;
-			return tmp;
-		} else {
-			it++;
+	if (s_size <= 0) {
+		throw std::out_of_range("Out of bound");
+	}
+	else {
+		for (std::list<T>::const_iterator it = lst.begin();
+			it != lst.end();) {
+			if (*it == t) {
+				T tmp = *it;
+				it = lst.erase(it);
+				s_size--;
+				return tmp;
+			}
+			else {
+				it++;
+			}
 		}
 	}
 	

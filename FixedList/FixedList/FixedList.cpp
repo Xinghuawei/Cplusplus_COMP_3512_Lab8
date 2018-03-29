@@ -15,7 +15,7 @@ int main() {
 	cout << mylist.remove(7) << endl;
 	cout << mylist.capacity() << endl;
 	cout << mylist.size() << endl;
-	cout << mylist.getFirstIndex(7) << endl;
+	cout << mylist.getFirstIndex(2) << endl;
 
 	system("pause");
 
