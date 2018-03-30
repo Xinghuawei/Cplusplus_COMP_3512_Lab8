@@ -38,15 +38,7 @@ FixedList<T, N>::FixedList() {}
 template<class T, size_t N>
 FixedList<T, N>::~FixedList() {}
 
-template<class T, size_t N>
-inline const T & FixedList<T, N>::get(unsigned int index) const {
-	if (index >= cap || index < 0) {
-		throw std::out_of_range("Index out of bound");
-	}
-	else {
-		lst[index];
-	}
-}
+
 
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
@@ -57,6 +49,17 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 	else {
 		std::list<T>::iterator it = std::next(lst.begin(), index); 
 			return *it;
+	}
+}
+
+template<class T, size_t N>
+inline const T & FixedList<T, N>::get(unsigned int index) const {
+	if (index >= cap || index < 0) {
+		throw std::invalid_argument("Index out of bound");
+	}
+	else {
+		std::list<T>::const_iterator it = std::next(lst.begin(), index);
+		return *it;
 	}
 }
 
@@ -95,7 +98,6 @@ inline bool FixedList<T, N>::add(const T & t)
 		return true;
 	} else {
 		return false;
-		//throw std::out_of_range("Out of bound");
 	}
 }
 
