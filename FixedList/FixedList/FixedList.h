@@ -3,6 +3,9 @@
 #include <stdexcept>
 
 using namespace std;
+/*
+Create a fixed list that can support any data type.
+*/
 template<class T, size_t N>
 class FixedList {
 private:
@@ -31,15 +34,19 @@ public:
 };
 
 
-
+//constructor
 template<class T, size_t N>
 FixedList<T, N>::FixedList() {}
 
+//destructor
 template<class T, size_t N>
 FixedList<T, N>::~FixedList() {}
 
-
-
+/*
+Overload subcript operator[]
+Precondition: an int represent index
+Postcondition: return element of the index.
+*/
 template<class T, size_t N>
 inline T & FixedList<T, N>::operator[](unsigned int index)
 {
@@ -52,10 +59,15 @@ inline T & FixedList<T, N>::operator[](unsigned int index)
 	}
 }
 
+/*
+Get the element in the input index.
+Precondition: an int represent index
+Postcondition: return element of the index.
+*/
 template<class T, size_t N>
 inline const T & FixedList<T, N>::get(unsigned int index) const {
 	if (index >= cap || index < 0) {
-		throw std::invalid_argument("Index out of bound");
+		throw std::out_of_range("Index out of bound");
 	}
 	else {
 		std::list<T>::const_iterator it = std::next(lst.begin(), index);
@@ -63,6 +75,11 @@ inline const T & FixedList<T, N>::get(unsigned int index) const {
 	}
 }
 
+/*
+Get the index of the first occurence of the input element.
+Precondition: a type T element
+Postcondition: return index of first occurence of that element.
+*/
 template<class T, size_t N>
 inline int FixedList<T, N>::getFirstIndex(const T & t) const
 {	
@@ -77,18 +94,35 @@ inline int FixedList<T, N>::getFirstIndex(const T & t) const
 		throw std::invalid_argument("Input not found in the container");
 }
 
+/*
+Size function return the number of element in the FixedList.
+Precondition: an valid container(include empty)
+Postcondition: return the size of the FixedList.
+*/
 template<class T, size_t N>
 inline size_t FixedList<T, N>::size() const
 {
 	return s_size;
 }
 
+/*
+Capacity function return the capacity of the FixedList
+Once capacity is initialed, it will not change.
+Precondition: an valid container(include empty)
+Postcondition: return the capacity of the FixedList.
+*/
 template<class T, size_t N>
 inline size_t FixedList<T, N>::capacity() const
 {
 	return cap;
 }
 
+
+/*
+Add function add element in the back of the Fixedlist.
+Precondition: If add success, return ture. Otherwise, return false.
+Postcondition: return ture.
+*/
 template<class T, size_t N>
 inline bool FixedList<T, N>::add(const T & t)
 {
@@ -101,6 +135,12 @@ inline bool FixedList<T, N>::add(const T & t)
 	}
 }
 
+/*
+Remove function remove element in the Fixedlist.
+Precondition: Fixedlist size not 0 or negative.
+Postcondition: Remove the element and return the removed element.
+The next closed element fill the blank.
+*/
 template<class T, size_t N>
 inline T FixedList<T, N>::remove(const T & t)
 {	
